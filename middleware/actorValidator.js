@@ -8,14 +8,18 @@ validate.actorRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .withMessage('Full name is required.'),
+      .withMessage('Full name is required.')
+      .isString()
+      .withMessage('Fullname must be a string.'),
 
     // gender is required
     body('gender')
       .trim()
       .escape()
       .notEmpty()
-      .withMessage('Gender is required.'),
+      .withMessage('Gender is required.')
+      .isString()
+      .withMessage('Gender must be a string.'),
 
     // age is required and must be a number
     body('age')
