@@ -1,0 +1,35 @@
+//LOCAL HOST 
+### Get all Actors
+Get http://localhost:8000/movies
+
+### Get single actor by ID
+Get http://localhost:8000/movies/6918c7105b94010770918aa4
+
+### Create a new actor
+Post http://localhost:8000/movies   HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Spider-Man: No Way Home",
+    "genre": "Superhero",
+    "releaseYear": 2021,
+    "mainActor": "Tom Holland"
+
+}
+
+### Update an existing actor
+Put http://localhost:8000/movies/6918da5fe8921ebd1dd1a401    HTTP/1.1
+content-type: application/json
+
+{
+  "fullName": "Zendaya",
+  "gender": "Female",
+  "age": 28,
+  "nationality": "American",
+  "knownFor": "Euphoria",
+  "yearsActive": "2009–present",
+  "awardsCount": 22
+}
+
+### Delete a actor
+Delete http://localhost:8000/movies/6918da5fe8921ebd1dd1a401
