@@ -3,7 +3,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 const actorsController ={}
 
-actorsController.getAll = async (req, res, next) => {
+actorsController.getAll = async (req, rest) => {
     try {
         const actors = await mongodb
             .getDatabase()
@@ -16,7 +16,6 @@ actorsController.getAll = async (req, res, next) => {
 
     } catch (error) {
         res.status(500).json({ message: error });
-        next(error);
     }
 }
 
