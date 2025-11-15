@@ -5,14 +5,14 @@ const actorsController ={}
 
 actorsController.getAll = async (req, res) => {
     try {
-        const actors = await mongodb
+        const movies = await mongodb
             .getDatabase()
             .db("Cinema")
             .collection("movies")
             .find()
             .toArray();
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(actors);
+        res.status(200).json(movies);
 
     } catch (error) {
         res.status(500).json({ message: error });
@@ -21,14 +21,14 @@ actorsController.getAll = async (req, res) => {
 
 actorsController.getSingle = async (req, res) => {
     try {
-        const actorId = new ObjectId(req.params.id);
+        const movieId = new ObjectId(req.params.id);
 
-        const actor = await mongodb
+        const movie = await mongodb
             .getDatabase()
             .db("Cinema")
             .collection("movies")
-            .findOne({ _id: actorId });
-        if (!actor) {
+            .findOne({ _id: movieId });
+        if (!movie) {
             return res.status(404).json({ message: "User not found" });
         }
         res.setHeader('Content-Type', 'application/json');
