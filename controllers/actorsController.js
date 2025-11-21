@@ -87,21 +87,17 @@ actorsController.updateActor = async (req, res) => {
             yearsActive: req.body.yearsActive,
             awardsCount: req.body.awardsCount
         };
-
         const result = await mongodb
             .getDatabase()
             .db("Cinema")
             .collection("Actors")
             .replaceOne({ _id: actorId }, actor);
-
         if (result.matchedCount === 0) {
             return res.status(404).json({ message: "Actor not found" });
         }
-
         if (result.modifiedCount > 0) {
             return res.status(200).json({ message: "Actor updated successfully" });
         }
-
         return res.status(200).json({ message: "No changes were made" });
 
     } catch (error) {
