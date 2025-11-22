@@ -7,4 +7,11 @@ function errorHandler(err, req, res, next) {
     next();
 }
 
-module.exports = errorHandler;
+function isAuthenticated(req, res, next) {
+    if (req.session.user === undefined){
+        return res.status(401).json('You have no access')
+    }
+    next();
+    }
+
+module.exports = {errorHandler, isAuthenticated };
