@@ -5,10 +5,10 @@
     "description": "Actors Api Documentation",
     "version": "1.0.0"
   },
-  "host": "project2-53mq.onrender.com",
+  "host": "localhost:8000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
