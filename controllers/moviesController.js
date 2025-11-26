@@ -101,17 +101,49 @@ moviesController.updateMovie = async (req, res) => {
 };
 
 
-moviesController.deleteMovie = async (req, res) => {
+moviesController.getMoviesByGenre = async (req, res) =>{
+    const genre = req.params.genre;
+    try {
+        const movies = await mongodb
+            .getDatabase()
+            .db("Cinema")
+            .collection("movies")
+            .find({ genre: genre })
+            .toArray();
+        if (movies.length === 0) {
+            return res.status(404).json({ message: "Movie not found" });
+        }
+        res.setHeader('Content-Type', 'application/json');
+        
+        res.status(200).json(movies);
+        }
 
-    const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db("Cinema").collection("movies").deleteOne({_id: userId});
-    if (result.deletedCount > 0) {
-        res.status(204).send();
-    }else{
-        res.status(500).json(result.error || "Some error occurred while deleting actor profile.");
+    catch (error) {
+        res.status(500).json({ message: error.toString() });
     }
-    
 }
+
+moviesController.getMoviesByActor = async (req, res) =>{
+    const actor = req.params.actor;
+    try {
+        const movies = await mongodb
+            .getDatabase()
+            .db("Cinema")
+            .collection("movies")
+            .find({ mainActor: actor })
+            .toArray();
+        if (movies.length === 0) {
+            return res.status(404).json({ message: "Movie not found" });
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(movies);
+        }
+
+    catch (error) {
+        res.status(500).json({ message: error.toString() });
+    }
+}
+
 
 moviesController.deleteMovie = async (req, res) => {
     try {

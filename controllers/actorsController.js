@@ -38,6 +38,28 @@ actorsController.getSingle = async (req, res) => {
     }
 };
 
+actorsController.getActorsByMovieTitle = async (req, res) => {
+    try {
+        const movieTitle = req.params.title;
+        const actors = await mongodb
+            .getDatabase()
+            .db("Cinema")
+            .collection("Actors")
+            .find({ knownFor: movieTitle })
+            .toArray();
+
+        if (actors.length === 0) {
+            return res.status(404).json({ message: "Actor not found" });
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(actors);
+        
+    }
+    catch (error) {
+        res.status(500).json({ message: error.toString() });
+    }
+}
+
 
 actorsController.createActor = async (req, res) => {
     //#swagger.tags = ['Users']
