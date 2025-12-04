@@ -5,6 +5,7 @@ const mongodb = require("./data/database");
 const actorsRouter = require("./routes/actorsRoute");
 const moviesRouter = require("./routes/movieRoute");
 const directorsRouter = require("./routes/directorsRoute");
+const genresRouter = require("./routes/genresRoute");
 const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/routeErrorHandler');
 const passport = require('passport')
@@ -38,6 +39,7 @@ app.get('/login', passport.authenticate('github'), (req, res) => {});
 app.use("/actors", actorsRouter);
 app.use("/movies", moviesRouter);
 app.use("/directors", directorsRouter);
+app.use("/genres", genresRouter);
 app.get('/logout', function(req, res, next){
     req.logOut(function(err){
         if (err){return next (err);}
